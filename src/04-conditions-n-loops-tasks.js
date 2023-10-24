@@ -130,8 +130,12 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const bottomX = rect1.top + rect1.height;
+  const bottomY = rect1.left + rect1.width;
+  if (bottomX > rect2.top && bottomY > rect2.left) {
+    return true;
+  } return false;
 }
 
 
@@ -180,13 +184,22 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  // for (let i; i < str.length - 1; i += 1) {
-  //   if (str[i] !== str[i + 1]) {
-  //     return str[i];
-  //   } return null;
-  // }
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const map = new Map();
+  for (let i = 0; i < str.length; i += 1) {
+    if (map.has(str[i])) {
+      let counter = map.get(str[i]);
+      counter += 1;
+      map.set(str[i], counter);
+    } else {
+      map.set(str[i], 1);
+    }
+  }
+  const arr = Array.from(map, ([key, value]) => ({ key, value }));
+  const result = arr.find((Element) => Element.value === 1);
+  if (result === undefined) {
+    return null;
+  } return result.key;
 }
 
 
@@ -212,8 +225,24 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let result = '';
+  if (isStartIncluded === true) {
+    result += '[';
+  } else {
+    result += '(';
+  }
+  if (a < b) {
+    result += `${String(a)}, ${String(b)}`;
+  } else {
+    result += `${String(b)}, ${String(a)}`;
+  }
+  if (isEndIncluded === true) {
+    result += ']';
+  } else {
+    result += ')';
+  }
+  return result;
 }
 
 
@@ -364,35 +393,49 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(str) {
-  let couterSquare = 0;
-  let couterRound = 0;
-  let couterFigure = 0;
-  let couterSharped = 0;
-  if (str.length === 0) {
-    return true;
-  }
-  for (let i = 0; i < str.length; i += 1) {
-    const bracket = str[i];
-    if (couter === -1) {
-      return false;
-    }
-    if (bracket === '['
-    || bracket === '{'
-    || bracket === '('
-    || bracket === '<') {
-      couter += 1;
-    }
-    if (bracket === ']'
-    || bracket === '}'
-    || bracket === ')'
-    || bracket === '>') {
-      couter -= 1;
-    }
-  }
-  if (couter === 0) {
-    return true;
-  } return false;
+function isBracketsBalanced(/* str */) {
+  // let counterSquare = 0;
+  // let counterRound = 0;
+  // let counterFigure = 0;
+  // let counterSharped = 0;
+  // if (str.length === 0) {
+  //   return true;
+  // }
+  // for (let i = 0; i < str.length; i += 1) {
+  //   const bracket = str[i];
+  //   if (bracket === '[') {
+  //     counterSquare += 1;
+  //   }
+  //   if (bracket === '{') {
+  //     counterFigure += 1;
+  //   }
+  //   if (bracket === '(') {
+  //     counterRound += 1;
+  //   }
+  //   if (bracket === '<') {
+  //     counterSharped += 1;
+  //   }
+  //   if (bracket === ']') {
+  //     counterSquare -= 1;
+  //   }
+  //   if (bracket === '}') {
+  //     counterFigure -= 1;
+  //   }
+  //   if (bracket === ')') {
+  //     counterRound -= 1;
+  //   }
+  //   if (bracket === '>') {
+  //     counterSharped -= 1;
+  //   }
+  //   if (counterSquare === -1 || counterRound === -1 || counterFigure === -1
+  //   || counterSharped === -1) {
+  //     return false;
+  //   }
+  // }
+  // if (counterSquare === 0 && counterRound === 0 && counterFigure === 0 && counterSharped === 0) {
+  //   return true;
+  // } return false;
+  throw new Error('Not implemented');
 }
 
 
@@ -416,8 +459,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
